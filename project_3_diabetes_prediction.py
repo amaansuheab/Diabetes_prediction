@@ -1,7 +1,7 @@
 
 import warnings
 warnings.filterwarnings("ignore")
-
+import sklearn as sk
 import numpy as np
 import pandas as pd
 from sklearn.preprocessing import StandardScaler
