@@ -35,7 +35,6 @@ def rule_age(patient):
         return "Age is a factor, maintain an active lifestyle to lower risk."
     return None
 
-# Combo rules
 def combo_glucose_bmi(patient):
     if patient['Glucose'] >= 126 and patient['BMI'] > 25:
         return "High glucose and BMI suggest increased diabetes risk; focus on diet + exercise."
@@ -52,3 +51,19 @@ def combo_insulin_glucose(patient):
     if patient['Insulin'] > 200 and patient['Glucose'] >= 126:
         return "High insulin and glucose indicate strong diabetes risk; consult a doctor."
     return None
+
+def generate_suggestions(patient):
+    single_rules = [rule_glucose, rule_blood_pressure, rule_bmi,
+                    rule_insulin, rule_pedigree, rule_age]
+    combo_rules = [combo_glucose_bmi, combo_age_pedigree, combo_insulin_glucose]
+    suggestions = []
+    for rule in single_rules + combo_rules:
+        s = rule(patient)
+        if s:
+            suggestions.append(s)
+    return suggestions
+
+def generate_patient_report(patient, image_path=None):
+ 
+    suggestions = generate_suggestions(patient)
+    suggestion_text = "Lifestyle Suggestions:\n" + "\n".join([f"- {s}" for s in suggestions])
