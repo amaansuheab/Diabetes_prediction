@@ -63,7 +63,59 @@ def generate_suggestions(patient):
             suggestions.append(s)
     return suggestions
 
-def generate_patient_report(patient, image_path=None):
+def generate_patient_report(patient):
  
     suggestions = generate_suggestions(patient)
     suggestion_text = "Lifestyle Suggestions:\n" + "\n".join([f"- {s}" for s in suggestions])
+    return suggestion_text
+def get_patient_input():
+    columns = [
+        'Pregnancies', 'Glucose', 'BloodPressure', 'SkinThickness',
+        'Insulin', 'BMI', 'DiabetesPedigreeFunction', 'Age'
+    ]
+    
+    patient = {}
+    print("Enter the following patient details (separated by space):")
+    print("Pregnancies Glucose BloodPressure SkinThickness Insulin BMI DiabetesPedigreeFunction Age")
+    
+    values = input(": ").strip().split()
+    
+    if len(values) != len(columns):
+        print("Error: You must enter exactly", len(columns), "values.")
+        return None
+    
+    for col, val in zip(columns, values):
+        try:
+            patient[col] = float(val)  
+        except ValueError:
+            print(f"Invalid value for {col}. Please enter a number.")
+            return None
+    
+    
+
+    return values,patient
+
+def predict_stats():
+    import project_3_diabetes_prediction as p
+    prediction=p.predictionn()
+    if(prediction==0):
+        return "Low chances of diabetes"
+    else:
+        return "high chances of diabetes"
+        
+
+def stats(patient):
+    values={
+        
+        "Age": patient['Age']+"\n",
+        "BMI": patient['BMI']+"\n",
+        "Blood Pressure": patient['BloodPressure']+"\n",
+        "PedigreeFunction": patient['DiabetesPedigreeFunction']+"\n",
+        "Insulin": patient['Insulin']+"\n",
+        
+    }
+    return values
+
+def imgg():
+    k=input("Enter Link address of image:---")
+    return k
