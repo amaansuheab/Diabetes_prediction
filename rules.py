@@ -68,6 +68,7 @@ def generate_patient_report(patient):
     suggestions = generate_suggestions(patient)
     suggestion_text = "Lifestyle Suggestions:\n" + "\n".join([f"- {s}" for s in suggestions])
     return suggestion_text
+
 def get_patient_input():
     columns = [
         'Pregnancies', 'Glucose', 'BloodPressure', 'SkinThickness',
@@ -105,17 +106,18 @@ def predict_stats():
         
 
 def stats(patient):
-    values={
-        
-        "Age": patient['Age']+"\n",
-        "BMI": patient['BMI']+"\n",
-        "Blood Pressure": patient['BloodPressure']+"\n",
-        "PedigreeFunction": patient['DiabetesPedigreeFunction']+"\n",
-        "Insulin": patient['Insulin']+"\n",
-        
-    }
-    return values
+    # Prepare a formatted multi-line string
+    stats_text = (
+        f"AGE: {patient['Age']}\n\n"
+        f"BMI: {patient['BMI']}\n\n"
+        f"BLOOD PRESSURE: {patient['BloodPressure']}\n\n"
+        f"PEDIGREE FUNCTION: {patient['DiabetesPedigreeFunction']}\n\n"
+        f"INSULIN: {patient['Insulin']}"
+    )
+    return stats_text
+
 
 def imgg():
     k=input("Enter Link address of image:---")
+    k=k.replace("\\","\\\\")
     return k
