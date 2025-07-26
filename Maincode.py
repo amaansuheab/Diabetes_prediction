@@ -2,8 +2,8 @@ import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 import qrcode
 import time as t1
-import rules
-import project_3_diabetes_prediction as p3
+import Customfnc
+import Model as p3
 import os
 
 
@@ -14,7 +14,7 @@ ax1, ax2, ax3, ax4 = axs.flatten()
 fig.suptitle("Medical Report", fontsize=22, color='cyan', fontweight='bold')
 
 
-img_path = rules.imgg().strip('"')
+img_path = Customfnc.imgg().strip('"')
 ax1.axis("off")
 if img_path and os.path.exists(img_path):
     img = mpimg.imread(img_path)
@@ -30,7 +30,7 @@ else:
 ax2.axis("off")
 ax2.set_facecolor('black')
 patient, predictions = p3.predictionn()
-patient_stats = rules.stats(patient)
+patient_stats = Customfnc.stats(patient)
 if(predictions==0):
     iop="Low Chances Of Diabetes"
 else:
@@ -44,7 +44,7 @@ ax2.text(
 
 ax3.axis('off')
 ax3.set_facecolor('black')
-suggestions = rules.generate_patient_report(patient)
+suggestions = Customfnc.generate_patient_report(patient)
 
 ax3.text(
     0.05, 0.95,

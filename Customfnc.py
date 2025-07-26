@@ -97,7 +97,7 @@ def get_patient_input():
     return values,patient
 
 def predict_stats():
-    import project_3_diabetes_prediction as p
+    import Model as p
     prediction=p.predictionn()
     if(prediction==0):
         return "Low chances of diabetes"
